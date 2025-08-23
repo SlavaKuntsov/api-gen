@@ -1,0 +1,6 @@
+[Http{{http}}("{{route_template}}")]
+public {{return_type}} {{method_name}}({{parameters}})
+{
+    // TODO: implement
+    return {{return_stmt}};
+}

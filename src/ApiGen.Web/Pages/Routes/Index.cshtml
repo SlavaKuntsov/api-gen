@@ -1,0 +1,17 @@
+@page
+@model ApiGen.Web.Pages.Routes.IndexModel
+<h1>Routes</h1>
+<a asp-page="Add">Add</a>
+<ul>
+@foreach (var c in Model.Controllers)
+{
+    <li>@c.Controller (@c.Prefix)
+        <ul>
+        @foreach (var a in c.Actions)
+        {
+            <li>@a.Http @a.Template - @a.Method</li>
+        }
+        </ul>
+    </li>
+}
+</ul>
