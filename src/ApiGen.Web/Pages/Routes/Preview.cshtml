@@ -1,0 +1,16 @@
+@page
+@model ApiGen.Web.Pages.Routes.PreviewModel
+<h1>Preview</h1>
+<pre>@Model.Diff</pre>
+<form method="post">
+    <input type="hidden" asp-for="ControllerName" />
+    <input type="hidden" asp-for="Prefix" />
+    <input type="hidden" asp-for="Http" />
+    <input type="hidden" asp-for="RouteTemplate" />
+    <input type="hidden" asp-for="MethodName" />
+    <input type="hidden" asp-for="ParameterType" />
+    <input type="hidden" asp-for="ParameterName" />
+    <input type="hidden" asp-for="ReturnType" />
+    <input type="hidden" asp-for="TargetFileRelative" />
+    <button type="submit">Apply</button>
+</form>

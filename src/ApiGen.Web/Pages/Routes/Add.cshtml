@@ -1,0 +1,15 @@
+@page
+@model ApiGen.Web.Pages.Routes.AddModel
+<h1>Add Endpoint</h1>
+<form method="post">
+    <div><label>Controller: <input asp-for="ControllerName" /></label></div>
+    <div><label>Prefix: <input asp-for="Prefix" /></label></div>
+    <div><label>HTTP: <input asp-for="Http" /></label></div>
+    <div><label>Route: <input asp-for="RouteTemplate" /></label></div>
+    <div><label>Method: <input asp-for="MethodName" /></label></div>
+    <div><label>Param Type: <input asp-for="ParameterType" /></label></div>
+    <div><label>Param Name: <input asp-for="ParameterName" /></label></div>
+    <div><label>Return Type: <input asp-for="ReturnType" /></label></div>
+    <div><label>Target File: <input asp-for="TargetFileRelative" /></label></div>
+    <button type="submit">Preview</button>
+</form>

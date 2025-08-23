@@ -1,0 +1,17 @@
+using Microsoft.AspNetCore.Mvc;
+
+namespace {{namespace}};
+
+[ApiController]
+[Route("{{prefix}}")] 
+public sealed class {{controller_name}} : ControllerBase
+{
+    {{~ for method in methods ~}}
+    [Http{{method.http}}("{{ method.template }}")]
+    public {{ method.return_type }} {{ method.name }}({{ method.parameters }})
+    {
+        // TODO: implement
+        return {{ method.return_stmt }};
+    }
+    {{~ end ~}}
+}
