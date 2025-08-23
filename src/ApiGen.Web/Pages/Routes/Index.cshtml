@@ -1,17 +1,104 @@
 @page
 @model ApiGen.Web.Pages.Routes.IndexModel
-<h1>Routes</h1>
-<a asp-page="Add">Add</a>
-<ul>
-@foreach (var c in Model.Controllers)
-{
-    <li>@c.Controller (@c.Prefix)
-        <ul>
-        @foreach (var a in c.Actions)
-        {
-            <li>@a.Http @a.Template - @a.Method</li>
-        }
-        </ul>
-    </li>
+@{
+    ViewData["Title"] = "Routes";
 }
-</ul>
+
+<h1 class="mb-4">Routes</h1>
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <h2 class="h4">Existing Controllers</h2>
+        <div class="accordion" id="routesAccordion">
+            @for (var i = 0; i < Model.Controllers.Count; i++)
+            {
+                var c = Model.Controllers[i];
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading@i">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse@i" aria-expanded="false" aria-controls="collapse@i">
+                            @c.Controller (@c.Prefix)
+                        </button>
+                    </h2>
+                    <div id="collapse@i" class="accordion-collapse collapse" data-bs-parent="#routesAccordion">
+                        <div class="accordion-body">
+                            <ul class="list-unstyled mb-0">
+                                @foreach (var a in c.Actions)
+                                {
+                                    <li><span class="badge bg-secondary">@a.Http</span> <code>@a.Template</code> — @a.Method</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h2 class="h4">New Endpoint</h2>
+        <form method="post">
+            <div class="mb-2">
+                <label class="form-label">Controller</label>
+                <input asp-for="ControllerName" class="form-control" />
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Prefix</label>
+                <input asp-for="Prefix" class="form-control" />
+            </div>
+            <div class="mb-2">
+                <label class="form-label">HTTP</label>
+                <input asp-for="Http" class="form-control" />
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Route</label>
+                <input asp-for="RouteTemplate" class="form-control" />
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Method</label>
+                <input asp-for="MethodName" class="form-control" />
+            </div>
+            <div id="params">
+                <div class="mb-2 param-row">
+                    <label class="form-label">Parameter</label>
+                    <div class="input-group">
+                        <input name="Parameters[0].Type" class="form-control" placeholder="Type" />
+                        <input name="Parameters[0].Name" class="form-control" placeholder="Name" />
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-sm btn-secondary mb-2" id="add-param">Add Parameter</button>
+            <div class="mb-2">
+                <label class="form-label">Return Type</label>
+                <input asp-for="ReturnType" class="form-control" />
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Target File</label>
+                <input asp-for="TargetFileRelative" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-primary" formaction="?handler=Preview">Preview</button>
+            @if (!string.IsNullOrEmpty(Model.Diff))
+            {
+                <button type="submit" class="btn btn-success ms-2" formaction="?handler=Apply">Apply</button>
+            }
+        </form>
+        @if (!string.IsNullOrEmpty(Model.Diff))
+        {
+            <h3 class="h5 mt-4">Diff</h3>
+            <pre class="diff">@Model.Diff</pre>
+        }
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    document.getElementById('add-param').addEventListener('click', function () {
+        var container = document.getElementById('params');
+        var index = container.querySelectorAll('.param-row').length;
+        var div = document.createElement('div');
+        div.className = 'mb-2 param-row';
+        div.innerHTML = '<div class="input-group">' +
+            '<input name="Parameters[' + index + '].Type" class="form-control" placeholder="Type" />' +
+            '<input name="Parameters[' + index + '].Name" class="form-control" placeholder="Name" />' +
+            '</div>';
+        container.appendChild(div);
+    });
+</script>
+}

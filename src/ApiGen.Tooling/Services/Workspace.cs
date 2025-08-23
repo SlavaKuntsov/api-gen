@@ -18,6 +18,9 @@ public sealed class Workspace : IWorkspace
 
     private string Resolve(string relativePath)
     {
+        if (string.IsNullOrWhiteSpace(relativePath))
+            throw new ArgumentException("Relative path must be provided", nameof(relativePath));
+
         var target = Path.GetFullPath(Path.Combine(_root, relativePath));
         var ok = target.StartsWith(_root + Path.DirectorySeparatorChar, StringComparison.Ordinal)
                  || string.Equals(target, _root, StringComparison.Ordinal);
