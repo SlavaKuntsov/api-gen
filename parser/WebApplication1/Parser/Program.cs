@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Http;
-using WebApplication1.Models;
-using WebApplication1.Services;
+using Parser.Models;
+using Parser.Services;
+using Parser.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +29,7 @@ app.MapGet("/api/listings", async (IRealEstateListingService service, Cancellati
         })
     .WithName("GetRealEstateListings")
     .WithDescription("Возвращает список двухкомнатных квартир с realt.by.")
-    .Produces<IReadOnlyList<RealEstateListing>>(StatusCodes.Status200OK)
+    .Produces<IReadOnlyList<RealEstateListing>>()
     .WithOpenApi();
 
 app.Run();

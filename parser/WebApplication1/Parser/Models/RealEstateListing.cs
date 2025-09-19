@@ -1,4 +1,4 @@
-namespace WebApplication1.Models;
+namespace Parser.Models;
 
 public sealed record RealEstateListing(
     string Title,

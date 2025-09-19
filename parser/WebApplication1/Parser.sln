@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{E88D23FD-504A-44FA-8A6B-5CC66DAC318C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parser", "Parser\Parser.csproj", "{E88D23FD-504A-44FA-8A6B-5CC66DAC318C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

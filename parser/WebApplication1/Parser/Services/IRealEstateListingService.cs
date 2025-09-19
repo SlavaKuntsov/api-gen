@@ -1,6 +1,6 @@
-using WebApplication1.Models;
+using Parser.Models;
 
-namespace WebApplication1.Services;
+namespace Parser.Services;
 
 public interface IRealEstateListingService
 {
